@@ -8,7 +8,7 @@ CREATE TABLE member_types(
     
 CREATE TABLE members (
     member_id int primary key,
-    m_ref varchar(8),
+    m_ref varchar(8) unique,
     first_name varchar(100),
     last_name varchar(100),
     adress varchar(100),
@@ -46,7 +46,6 @@ CREATE TABLE participations (
 );
 
 CREATE TABLE asign(
-    asign_id int,
     evenement_id int references evenements(evenement_id),
     activity_id int references activities(activity_id)
 );
@@ -68,9 +67,10 @@ CREATE TABLE donators (
 
 CREATE TABLE finances (
     finances_id int,
+    fin_categories varchar(1),
+    amount int,
     add_date date default current_date,
     fin_description text,
-    fin_categories varchar(1),
     donator_id int references donators(donator_id),
     ressource_id int references ressources(ressource_id)
 );

@@ -8,15 +8,30 @@ const participations = require('./manage_participation');
 const resources = require('./manage_ressources');
 const finances = require('./manage_finances');
 
+
+
 function showMainMenu() {
   console.log(`
-    1. Gestion des membres
-    2. Gestion des activités
-    3. Gestion des événements
-    4. Gestion des ressources
-    5. Gestion des finances
-    6. Gestion des participations
-    6. Quitter
+  =======================================
+  ╔══════════════════════════════════════╗
+  ║                                      ║
+  ║ ███████╗ ██████╗  █████╗ ███╗   ███╗ ║
+  ║ ██╔════╝██╔═══██╗██╔══██╗████╗ ████║ ║
+  ║ ███████╗██║   ██║███████║██╔████╔██║ ║
+  ║ ╚════██║██║   ██║██╔══██║██║╚██╔╝██║ ║
+  ║ ███████║╚██████╔╝██║  ██║██║ ╚═╝ ██║ ║
+  ║ ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ║              
+  ║                                      ║
+  ║     1. Gestion des membres           ║
+  ║     2. Gestion des activités         ║
+  ║     3. Gestion des événements        ║
+  ║     4. Gestion des ressources        ║
+  ║     5. Gestion des finances          ║
+  ║     6. Gestion des participations    ║
+  ║     7. Quitter                       ║
+  ║                                      ║
+  ╚══════════════════════════════════════╝
+  =======================================
   `);
 }
 
@@ -29,14 +44,6 @@ function askQuestion(query) {
     rl.close();
     resolve(ans);
   }));
-}
-
-async function handleResources() {
-  // Implémentez les sous-menus et les fonctions pour les ressources ici
-}
-
-async function handleFinances() {
-  // Implémentez les sous-menus et les fonctions pour les finances ici
 }
 
 async function main() {

@@ -2,7 +2,6 @@ const db = require('./db');
 
 const readline = require('readline');
 
-// Fonction pour poser une question à l'utilisateur et attendre la réponse
 function askQuestion(query) {
   const rl = readline.createInterface({
     input: process.stdin,

@@ -2,7 +2,7 @@
 const db = require('./db');
 const readline = require('readline');
 
-// Fonction pour poser une question à l'utilisateur et attendre la réponse
+
 function askQuestion(query) {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -14,7 +14,6 @@ function askQuestion(query) {
   }));
 }
 
-// Fonction pour afficher le sous-menu
 function showSubMenu(section) {
   console.log(`\n  Gestion des ${section} :`);
   console.log('  1. Insertion');
@@ -61,11 +60,9 @@ async function modifyResource() {
       console.log('Aucune ressource trouvée avec cet identifiant.');
       return;
     }
-
     const new_res_type = await askQuestion(`Nouveau type de ressource (${rows[0].res_type}) : `) || rows[0].res_type;
     const new_res_description = await askQuestion(`Nouvelle description (${rows[0].res_description}) : `) || rows[0].res_description;
     const new_res_count = await askQuestion(`Nouvelle quantité (${rows[0].res_count}) : `) || rows[0].res_count;
-
     await db.query(
       'UPDATE ressources SET res_type = $1, res_description = $2, res_count = $3 WHERE ressource_id = $4',
       [new_res_type, new_res_description, new_res_count, ressource_id]

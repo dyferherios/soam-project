@@ -3,11 +3,11 @@ INSERT INTO member_types (member_type_id, member_type_name)
 VALUES (1, 'Personnal'), (2, 'Member'), (3, 'Volunteer');
 
 -- Insert data into members
-INSERT INTO members (member_id, m_ref, first_name, last_name, adress, email, phone, member_type_id)
+INSERT INTO members (m_ref, first_name, last_name, adress, email, phone, member_type_id)
 VALUES 
-(1, 'M0001', 'John', 'Doe', '123 Main St', 'john.doe@example.com', '123-456-7890', 1),
-(2, 'M0002', 'Jane', 'Smith', '456 Elm St', 'jane.smith@example.com', '234-567-8901', 2),
-(3, 'M0003', 'Emily', 'Jones', '789 Maple Ave', 'emily.jones@example.com', '345-678-9012', 3);
+('M0001', 'John', 'Doe', '123 Main St', 'john.doe@example.com', '123-456-7890', 1),
+('M0002', 'Jane', 'Smith', '456 Elm St', 'jane.smith@example.com', '234-567-8901', 2),
+('M0003', 'Emily', 'Jones', '789 Maple Ave', 'emily.jones@example.com', '345-678-9012', 3);
 
 -- Insert data into feedbacks
 INSERT INTO feedbacks (feedbacks_id, fb_description, member_id)
@@ -30,6 +30,9 @@ VALUES
 (2, 'Keynote Speech', 'Keynote speech by a renowned tech leader.', '2024-07-20', 2),
 (3, 'Warm-up Session', 'A warm-up session before the run.', '2024-08-25', 3);
 
+INSERT INTO activities (activity_id, ac_name, ac_description, ac_date)
+VALUES 
+(4, 'Opening Classroom', 'The official opening Classroom.', '2024-05-05');
 
 -- Insert data into participations
 INSERT INTO participations (member_id, evenement_id, activity_id)
@@ -117,5 +120,3 @@ JOIN members m ON d.member_id = m.member_id;
 SELECT r.ressource_id, r.res_type, r.res_description, f.amount
 FROM ressources r
 JOIN finances f ON r.ressource_id = f.ressource_id;
-
-

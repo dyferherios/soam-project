@@ -7,7 +7,7 @@ CREATE TABLE member_types(
 );
     
 CREATE TABLE members (
-    member_id int primary key,
+    member_id serial primary key ,
     m_ref varchar(8) unique,
     first_name varchar(100),
     last_name varchar(100),

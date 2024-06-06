@@ -1,6 +1,7 @@
 // manage_event.js
 const db = require('./db');
 const readline = require('readline');
+const Table = require('cli-table');
 
 // Fonction pour poser une question à l'utilisateur et attendre la réponse
 function askQuestion(query) {
@@ -67,8 +68,21 @@ async function createEvent() {
 async function displayEvents() {
   try {
     const { rows } = await db.query('SELECT * FROM evenements');
-    console.log('Événements :');
-    console.table(rows);
+    if (rows.length === 0) {
+      console.log('Aucun événement trouvé.');
+    } else {
+      const table = new Table({
+        head: Object.keys(rows[0]),
+        colWidths: Object.keys(rows[0]).map(() => 20) // Ajustez la largeur des colonnes selon vos besoins
+      });
+
+      rows.forEach(row => {
+        table.push(Object.values(row));
+      });
+
+      console.log('Événements :');
+      console.log(table.toString());
+    }
   } catch (err) {
     console.error('Erreur lors de la récupération des événements :', err.message);
   }
@@ -115,6 +129,7 @@ async function deleteEvent() {
   }
 }
 
+
 async function searchEvent() {
   const searchTerm = await askQuestion('Entrez un terme de recherche : ');
 
@@ -131,7 +146,17 @@ async function searchEvent() {
     if (rows.length === 0) {
       console.log('Aucun événement trouvé.');
     } else {
-      console.table(rows);
+      const table = new Table({
+        head: Object.keys(rows[0]),
+        colWidths: Object.keys(rows[0]).map(() => 20) 
+      });
+
+      rows.forEach(row => {
+        table.push(Object.values(row));
+      });
+
+      console.log('Résultats de la recherche :');
+      console.log(table.toString());
     }
   } catch (err) {
     console.error('Erreur lors de la recherche de l\'événement :', err.message);

@@ -1,5 +1,7 @@
 const db = require('./db');
 const readline = require('readline');
+const Table = require('cli-table');
+
 
 function askQuestion(query) {
   const rl = readline.createInterface({
@@ -59,11 +61,25 @@ async function createParticipation() {
   }
 }
 
+
 async function displayParticipations() {
   try {
     const { rows } = await db.query('SELECT * FROM participations');
-    console.log('Participations :');
-    console.table(rows);
+    if (rows.length === 0) {
+      console.log('Aucune participation trouvée.');
+    } else {
+      const table = new Table({
+        head: Object.keys(rows[0]),
+        colWidths: Object.keys(rows[0]).map(() => 20) // Ajustez la largeur des colonnes selon vos besoins
+      });
+
+      rows.forEach(row => {
+        table.push(Object.values(row));
+      });
+
+      console.log('Participations :');
+      console.log(table.toString());
+    }
   } catch (err) {
     console.error('Erreur lors de la récupération des participations :', err.message);
   }
@@ -112,6 +128,27 @@ async function deleteParticipation() {
   }
 }
 
+// async function searchParticipation() {
+//   const searchTerm = await askQuestion('Entrez un terme de recherche : ');
+
+//   try {
+//     const { rows } = await db.query(`
+//       SELECT * FROM participations 
+//       WHERE CAST(member_id AS TEXT) ILIKE $1 
+//       OR CAST(evenement_id AS TEXT) ILIKE $1 
+//       OR CAST(activity_id AS TEXT) ILIKE $1
+//     `, [`%${searchTerm}%`]);
+
+//     if (rows.length === 0) {
+//       console.log('Aucune participation trouvée.');
+//     } else {
+//       console.table(rows);
+//     }
+//   } catch (err) {
+//     console.error('Erreur lors de la recherche de la participation :', err.message);
+//   }
+// }
+
 async function searchParticipation() {
   const searchTerm = await askQuestion('Entrez un terme de recherche : ');
 
@@ -126,13 +163,22 @@ async function searchParticipation() {
     if (rows.length === 0) {
       console.log('Aucune participation trouvée.');
     } else {
-      console.table(rows);
+      const table = new Table({
+        head: Object.keys(rows[0]),
+        colWidths: Object.keys(rows[0]).map(() => 20) // Ajustez la largeur des colonnes selon vos besoins
+      });
+
+      rows.forEach(row => {
+        table.push(Object.values(row));
+      });
+
+      console.log('Résultats de la recherche de participation :');
+      console.log(table.toString());
     }
   } catch (err) {
     console.error('Erreur lors de la recherche de la participation :', err.message);
   }
 }
-
 async function handleParticipations() {
   let running = true;
   while (running) {

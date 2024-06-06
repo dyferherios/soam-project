@@ -2,7 +2,6 @@ const db = require('./db');
 
 const readline = require('readline');
 
-// Fonction pour poser une question à l'utilisateur et attendre la réponse
 function askQuestion(query) {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -14,18 +13,35 @@ function askQuestion(query) {
   }));
 }
 
-function showSubMenu(section) {
+function showSubMenu() {
   console.log(`
-      Gestion des ${section} :
-      1. Insertion
-      2. Afficher
-      3. Modifier
-      4. Supprimer
-      5. Recherche
-      6. Retour au menu principal
+      =======================================
+      ╔══════════════════════════════════════╗
+      ║                                      ║
+      ║ \x1b[34m███████╗ ██████╗  █████╗ ███╗   ███╗ \x1b[0m║
+      ║ \x1b[34m██╔════╝██╔═══██╗██╔══██╗████╗ ████║ \x1b[0m║
+      ║ \x1b[34m███████╗██║   ██║███████║██╔████╔██║ \x1b[0m║
+      ║ \x1b[34m╚════██║██║   ██║██╔══██║██║╚██╔╝██║ \x1b[0m║
+      ║ \x1b[34m███████║╚██████╔╝██║  ██║██║ ╚═╝ ██║ \x1b[0m║
+      ║ \x1b[34m╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ \x1b[0m║
+      ╚══════════════════════════════════════╝
+      ╔══════════════════════════════════════╗
+      ║                                      ║
+      ║         \x1b[33mGESTION DES MEMBRES\x1b[0m          ║
+      ╚══════════════════════════════════════╝
+      ╔══════════════════════════════════════╗
+      ║                                      ║
+      ║     1. Insertion                     ║
+      ║     2. Afficher                      ║
+      ║     3. Modifier                      ║
+      ║     4. Supprimer                     ║
+      ║     5. Recherche                     ║
+      ║     6. Retour au menu principal      ║
+      ║                                      ║
+      ╚══════════════════════════════════════╝
+      =======================================
     `);
 }
-
 async function handleMembers() {
   let running = true;
   while (running) {

@@ -1,8 +1,6 @@
-// manage_participation.js
 const db = require('./db');
 const readline = require('readline');
 
-// Fonction pour poser une question à l'utilisateur et attendre la réponse
 function askQuestion(query) {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -14,15 +12,34 @@ function askQuestion(query) {
   }));
 }
 
-// Fonction pour afficher le sous-menu
 function showSubMenu(section) {
-  console.log(`\n  Gestion des ${section} :`);
-  console.log('  1. Insertion');
-  console.log('  2. Afficher');
-  console.log('  3. Modifier');
-  console.log('  4. Supprimer');
-  console.log('  5. Recherche');
-  console.log('  6. Retour au menu principal');
+  console.log(`
+  =======================================
+  ╔══════════════════════════════════════╗
+  ║                                      ║
+  ║ \x1b[34m███████╗ ██████╗  █████╗ ███╗   ███╗ \x1b[0m║
+  ║ \x1b[34m██╔════╝██╔═══██╗██╔══██╗████╗ ████║ \x1b[0m║
+  ║ \x1b[34m███████╗██║   ██║███████║██╔████╔██║ \x1b[0m║
+  ║ \x1b[34m╚════██║██║   ██║██╔══██║██║╚██╔╝██║ \x1b[0m║
+  ║ \x1b[34m███████║╚██████╔╝██║  ██║██║ ╚═╝ ██║ \x1b[0m║
+  ║ \x1b[34m╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ \x1b[0m║
+  ╚══════════════════════════════════════╝
+  ╔══════════════════════════════════════╗
+  ║                                      ║
+  ║     \x1b[33mGESTION DES PARTICIPATIONS\x1b[0m       ║
+  ╚══════════════════════════════════════╝
+  ╔══════════════════════════════════════╗
+  ║                                      ║
+  ║     1. Insertion                     ║
+  ║     2. Afficher                      ║
+  ║     3. Modifier                      ║
+  ║     4. Supprimer                     ║
+  ║     5. Recherche                     ║
+  ║     6. Retour au menu principal      ║
+  ║                                      ║
+  ╚══════════════════════════════════════╝
+  =======================================
+  `);
 }
 
 async function createParticipation() {
